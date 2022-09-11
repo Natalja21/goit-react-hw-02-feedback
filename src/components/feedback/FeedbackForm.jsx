@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
+import Section from './Section';
+import Container from './Container';
+import Notification from './Notification';
 
-class FeedbackForm extends React.Component {
+class FeedbackForm extends Component {
   static defaultProps = {
     initialGood: 0,
     initialNeutral: 0,
@@ -18,49 +21,44 @@ class FeedbackForm extends React.Component {
     good: this.props.initialGood,
     neutral: this.props.initialNeutral,
     bad: this.props.initialBad,
-    };
-    
-   handleIncrementGood = () => {
-    console.log('click +1');
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-    };
-    
-    handleIncrementNeutral = () => {
-    console.log('click +1');
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-    };
-     handleIncrementBad = () => {
-    console.log('click +1');
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
   };
+
+  addFeedback = option => {
+   
+    this.setState(state => ({
+      [option]: state[option] + 1,
+    }));
+  };
+ countTotalFeedback = () => {
+    return Object.values(this.state).reduce((acc, value)=> acc+value, 0)
+   
+  };
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    return Math.round((good / this.countTotalFeedback()) * 100) || 0;
+  };
+  
   render() {
     return (
-      <div className="">
-        <FeedbackOptions
-         
-          goodFeedback={this.handleIncrementGood}
-          neutralFeedback={this.handleIncrementNeutral}
-          badFeedback={this.handleIncrementBad}
-            />
-            <Statistics
-                goodCounter={this.state.good}
-                neutralgoodCounter={this.state.neutral}
-                badCounter={this.state.bad}
-            />
-      </div>
+      <Container>
+        <Section title='Please leave feedback'>
+          <FeedbackOptions
+          options={Object.keys(this.state)}
+          onLeaveFeedback={this.addFeedback}
+        />
+        </Section>    
+        <Section title='Statistics'>{this.countTotalFeedback() > 0 ? <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        /> : <Notification message='There is no feedback'/>}
+          
+         </Section> 
+      </Container>
     );
   }
 }
+
 export default FeedbackForm;
