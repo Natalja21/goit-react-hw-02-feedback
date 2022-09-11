@@ -29,16 +29,11 @@ class FeedbackForm extends Component {
       [option]: state[option] + 1,
     }));
   };
- countTotalFeedback = () => {
-    return Object.values(this.state).reduce((acc, value)=> acc+value, 0)
-   
-  };
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    return Math.round((good / this.countTotalFeedback()) * 100) || 0;
-  };
-  
+
   render() {
+    const total = Object.values(this.state).reduce((acc, value) => acc + value, 0);
+    const { good } = this.state; 
+    const  countPositiveFeedbackPercentage = Math.round((good / total) * 100) || 0;
     return (
       <Container>
         <Section title='Please leave feedback'>
@@ -47,12 +42,12 @@ class FeedbackForm extends Component {
           onLeaveFeedback={this.addFeedback}
         />
         </Section>    
-        <Section title='Statistics'>{this.countTotalFeedback() > 0 ? <Statistics
+        <Section title='Statistics'>{total > 0 ? <Statistics
           good={this.state.good}
           neutral={this.state.neutral}
           bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
+          total={total}
+          positivePercentage={countPositiveFeedbackPercentage}
         /> : <Notification message='There is no feedback'/>}
           
          </Section> 
