@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-
+import styles from 'components/styles/SectionTitle.module.css';
 
 const Section = ({ title, children }) => {
   return (
-    <section >
-      <h2 >{title}</h2>
+    <section>
+      <h2 className={styles.title}>{title}</h2>
       {children}
     </section>
   );
-}
+};
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,

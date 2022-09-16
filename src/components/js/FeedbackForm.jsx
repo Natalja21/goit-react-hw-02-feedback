@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
@@ -24,33 +24,40 @@ class FeedbackForm extends Component {
   };
 
   addFeedback = option => {
-   
     this.setState(state => ({
       [option]: state[option] + 1,
     }));
   };
 
   render() {
-    const total = Object.values(this.state).reduce((acc, value) => acc + value, 0);
-    const { good } = this.state; 
-    const  countPositiveFeedbackPercentage = Math.round((good / total) * 100) || 0;
+    const total = Object.values(this.state).reduce(
+      (acc, value) => acc + value,
+      0
+    );
+    const { good } = this.state;
+    const countPositiveFeedbackPercentage =
+      Math.round((good / total) * 100) || 0;
     return (
       <Container>
-        <Section title='Please leave feedback'>
+        <Section title="Please leave feedback">
           <FeedbackOptions
-          options={Object.keys(this.state)}
-          onLeaveFeedback={this.addFeedback}
-        />
-        </Section>    
-        <Section title='Statistics'>{total > 0 ? <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={total}
-          positivePercentage={countPositiveFeedbackPercentage}
-        /> : <Notification message='There is no feedback'/>}
-          
-         </Section> 
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.addFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
+          {total > 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={total}
+              positivePercentage={countPositiveFeedbackPercentage}
+            />
+          ) : (
+            <Notification message="There is no feedback !" />
+          )}
+        </Section>
       </Container>
     );
   }
