@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from 'components/styles/FeedbackOptions.module.css';
+import styles from './FeedbackOptions.module.css';
 const colors = [
   'rgba(127, 236, 147, 0.879)',
   'rgb(231, 238, 32)',

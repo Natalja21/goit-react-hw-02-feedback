@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from 'components/styles/Notification.module.css';
+import styles from './Notification.module.css';
 
 const Notification = ({ message }) => {
   return <p className={styles.subtitle}>{message}</p>;

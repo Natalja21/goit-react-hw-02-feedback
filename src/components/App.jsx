@@ -1,5 +1,5 @@
 import React from 'react';
-import FeedbackForm from './js/FeedbackForm';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
 export const App = () => {
   return (
     <div>

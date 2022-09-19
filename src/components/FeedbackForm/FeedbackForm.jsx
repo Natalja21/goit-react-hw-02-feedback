@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FeedbackOptions from './FeedbackOptions';
-import Statistics from './Statistics';
-import Section from './Section';
-import Container from './Container';
-import Notification from './Notification';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
+import Statistics from '../Statistics/Statistics';
+import Section from '../Section/Section';
+import Container from '../Сontainer/Container';
+import Notification from '../Notification/Notification';
 
 class FeedbackForm extends Component {
   static defaultProps = {

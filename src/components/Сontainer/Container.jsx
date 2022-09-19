@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from 'components/styles/Container.module.css';
+import styles from './Container.module.css';
 
 const Container = ({ children }) => (
   <div className={styles.feedbek__container}>{children}</div>
